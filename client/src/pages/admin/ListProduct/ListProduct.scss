@@ -1,0 +1,121 @@
+.product-list {
+  background-color: #2c2c2c;
+  color: white;
+  padding: 5px;
+  animation: fadeIn 1.4s ease-in-out;
+
+  h2 {
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 18px;
+    border-bottom: 1px solid white;
+  }
+
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px auto;
+
+    thead {
+      background-color: #3e3e3e;
+
+      th {
+        padding: 5px;
+        font-weight: bold;
+        color: #222;
+        font-size: 14px;
+      }
+
+      .actions {
+        width: 10%;
+        text-align: center;
+      }
+    }
+
+    tbody {
+      tr {
+        background-color: #444;
+        transition: background-color 0.3s;
+        text-align: center;
+
+        &:hover {
+          background-color: #555;
+        }
+
+        td {
+          padding: 5px;
+          border-bottom: 2px solid #555;
+          border-right: 2px solid #555;
+          color: #b3b3b3;
+          font-size: 12px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          max-width: 50px;
+
+          .product-thumbnail {
+            max-width: 20px;
+            max-height: 40px;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            margin-left: 5px;
+
+            @media (min-width: 1024px) {
+              max-width: 40px;
+              max-height: 40px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .no-products {
+    text-align: center;
+    font-size: 14px;
+    color: #b3b3b3;
+    margin-top: 10px;
+  }
+
+  .delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #222;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .product-table {
+      thead th {
+        width: 18%;
+      }
+
+      tbody td {
+        font-size: 13px;
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .product-table {
+      thead th {
+        width: 18%;
+      }
+
+      tbody td {
+        font-size: 14px;
+      }
+    }
+  }
+}
