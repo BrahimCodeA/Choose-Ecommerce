@@ -1,0 +1,147 @@
+.bestseller-slider {
+  padding: 2rem 1rem;
+  margin: 5rem 0;
+
+  h2 {
+    font-size: 2rem;
+    margin-left: 5%;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+
+  .slider-container {
+    position: relative;
+
+    .slick-slider {
+      .slick-slide {
+        padding-right: 1rem;
+      }
+
+      .slick-arrow {
+        z-index: 10;
+        width: 3rem;
+        height: 3rem;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+        position: absolute;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &:before {
+          font-size: 1rem;
+          color: #333;
+        }
+      }
+
+      .slick-prev,
+      .slick-next {
+        top: 0;
+      }
+
+      .slick-prev {
+        left: 5px;
+      }
+
+      .slick-next {
+        right: 0;
+      }
+    }
+  }
+
+  .product-card {
+    overflow: hidden;
+    white-space: nowrap;
+    text-emphasis: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    margin-right: 1rem;
+
+    .product-image {
+      width: 100%;
+      height: 120px;
+      margin-bottom: 1rem;
+    }
+
+    .product-name {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.5rem;
+      margin-left: 0.5rem;
+    }
+
+    .product-price {
+      font-size: 1.3rem;
+      color: #666;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .no-products {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    padding: 3rem 1rem;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-left: 8%;
+    }
+
+    .slick-arrow {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    .product-card {
+      .product-image {
+        height: 200px;
+      }
+
+      .product-name {
+        font-size: 1.5rem;
+      }
+
+      .product-category {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    padding: 5rem 1rem;
+
+    h2 {
+      font-size: 3rem;
+      margin-left: 10%;
+    }
+
+    .product-card {
+      .product-image {
+        height: 230px;
+      }
+
+      .product-name {
+        font-size: 1.6rem;
+      }
+
+      .product-category {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
