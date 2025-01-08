@@ -1,0 +1,13 @@
+.admin-content {
+  background: linear-gradient(135deg, #333, #000);
+  min-height: 100vh;
+  padding: 10px;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+}
