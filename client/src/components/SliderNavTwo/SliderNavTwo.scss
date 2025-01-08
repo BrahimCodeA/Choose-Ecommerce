@@ -1,0 +1,49 @@
+.navbar-2 {
+  background: linear-gradient(45deg, #333, #111, #222);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  padding: 1px;
+  animation: fadeIn 0.5s ease-in-out;
+
+  .navbar2-items {
+    display: flex;
+    padding: 4px 0;
+    font-size: 10px;
+
+    svg {
+      margin-right: 4px;
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-2 {
+    font-size: 10px;
+
+    .navbar2-items {
+      font-size: 10px;
+
+      svg {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-2 {
+    font-size: 9px;
+
+    .navbar2-items {
+      font-size: 9px;
+
+      svg {
+        font-size: 12px;
+      }
+    }
+  }
+}
