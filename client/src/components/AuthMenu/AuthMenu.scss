@@ -1,0 +1,79 @@
+.avatar-modals {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-icon {
+  font-size: 2rem;
+  color: #333;
+}
+
+.avatar-modals-links {
+  position: absolute;
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 0.5rem;
+  z-index: 1;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+}
+
+.avatar-modals-links .btn-signin,
+.avatar-modals-links .btn-signup,
+.avatar-modals-links .btn-profile,
+.avatar-modals-links .btn-logout,
+.avatar-modals .btn-admin {
+  font-family: "Inter", sans-serif;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100%;
+}
+
+.avatar-modals-links .btn-signin {
+  color: white;
+  background-color: #555;
+}
+
+.avatar-modals-links .btn-signin:hover {
+  background-color: #333;
+}
+
+.avatar-modals-links .btn-signup {
+  color: #555;
+  background-color: #fff;
+}
+
+.avatar-modals-links .btn-signup:hover,
+.avatar-modals-links .btn-profile:hover {
+  color: #fff;
+  background-color: #555;
+}
+
+.avatar-modals-links .btn-profile {
+  color: #555;
+  background-color: #fff;
+  font-weight: bold;
+}
+
+.avatar-modals-links .btn-logout {
+  color: white;
+  background-color: #555;
+}
+
+.avatar-modals-links .btn-logout:hover {
+  background-color: #333;
+}
+
+.avatar-modals-links .btn-admin {
+  color: #555;
+  background-color: #fff;
+}
