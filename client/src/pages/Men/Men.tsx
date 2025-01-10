@@ -1,5 +1,7 @@
-import React from "react";
+import { FilteredProducts } from "@/components/FilteredProducts/FilteredProducts";
 
-export default function Men() {
-  return <div>Men</div>;
-}
+const HommePage = () => {
+  return <FilteredProducts category="Homme" title="Produits pour Homme" />;
+};
+
+export default HommePage;
