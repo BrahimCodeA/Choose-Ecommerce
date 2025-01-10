@@ -17,7 +17,7 @@ export const DiscountedProducts = () => {
   return (
     <>
       <section className="isDiscounted-container">
-        <h2>Les promotions</h2>
+        <h2>Les Promotions</h2>
         <div>
           {discountedProducts.length > 0 ? (
             itemsToDisplay.map((product) => (

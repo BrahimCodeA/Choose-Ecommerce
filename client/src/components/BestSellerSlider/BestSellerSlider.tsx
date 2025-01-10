@@ -11,7 +11,7 @@ export const BestSellerSlider = () => {
 
   return (
     <section className="bestseller-slider">
-      <h2>Les meilleures ventes</h2>
+      <h2>Les Meilleures Ventes</h2>
       <div className="slider-container">
         {bestsellers.length > 0 ? (
           <Slider {...sliderBestSellerSettings}>
