@@ -12,21 +12,21 @@ export default function CategoryPages() {
         altText="Sneakers Homme"
         title="Homme"
         description="Jordan, Nike, et plus."
-        link="/Men"
+        link="/men"
       />
       <Category
         imageSrc={women}
         altText="Sneakers Femme"
         title="Femme"
         description="Styles tendance."
-        link="/Women"
+        link="/women"
       />
       <Category
         imageSrc={kid}
         altText="Sneakers Enfant"
         title="Enfant"
         description="Pour les petits fans."
-        link="/Kid"
+        link="/kid"
       />
     </section>
   );
