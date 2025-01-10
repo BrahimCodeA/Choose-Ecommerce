@@ -7,7 +7,7 @@ import Pagination from "../Pagination/Pagination";
 export const DiscountedProducts = () => {
   const products = useProductList();
   const discountedProducts =
-    products?.filter((product) => product.discountAmount > 0) || [];
+    products?.filter((product) => product.discountAmount) || [];
 
   const { itemsToDisplay, page, totalPages, handlePageChange } = usePagination(
     discountedProducts,
