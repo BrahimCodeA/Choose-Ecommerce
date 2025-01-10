@@ -1,6 +1,5 @@
 import "./Pagination.scss";
 import { Button } from "../ui/Button";
-import React from "react";
 import { ImPrevious2 } from "react-icons/im";
 import { ImNext2 } from "react-icons/im";
 
@@ -10,11 +9,7 @@ type PaginationProps = {
   onPageChange: (newPage: number) => void;
 };
 
-const Pagination: React.FC<PaginationProps> = ({
-  page,
-  totalPages,
-  onPageChange,
-}) => {
+const Pagination = ({ page, totalPages, onPageChange }: PaginationProps) => {
   return (
     <div className="pagination">
       <Button
