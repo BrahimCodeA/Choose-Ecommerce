@@ -4,11 +4,11 @@ import React from "react";
 import { ImPrevious2 } from "react-icons/im";
 import { ImNext2 } from "react-icons/im";
 
-interface PaginationProps {
+type PaginationProps = {
   page: number;
   totalPages: number;
   onPageChange: (newPage: number) => void;
-}
+};
 
 const Pagination: React.FC<PaginationProps> = ({
   page,
