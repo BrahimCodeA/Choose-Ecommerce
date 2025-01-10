@@ -9,7 +9,9 @@ export default function Home() {
     <>
       <HeroComponent />
       <BestSellerSlider />
-      <div className="bestseller-discount-separator"></div>
+      <div className="bestseller-discount-separator">
+        <div className="text">Une collection unique</div>
+      </div>
       <DiscountedProducts />
       <CategoryPages />
     </>
