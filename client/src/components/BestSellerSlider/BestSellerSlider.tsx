@@ -28,7 +28,7 @@ export const BestSellerSlider = () => {
             ))}
           </Slider>
         ) : (
-          <p className="no-products">Aucun produit BestSeller trouvé.</p>
+          <p className="no-products">Aucun produit trouvé.</p>
         )}
       </div>
     </section>
