@@ -17,16 +17,14 @@ type Product = {
 
 type ProductState = {
   products: Product[];
-  currentPage: number;
-  totalPages: number;
-  itemsPerPage: number;
+  page: number;
+  pageSize: number;
 };
 
 const initialState: ProductState = {
   products: [],
-  currentPage: 1,
-  totalPages: 1,
-  itemsPerPage: 8,
+  page: 1,
+  pageSize: 8,
 };
 
 const productSlice = createSlice({
@@ -46,26 +44,15 @@ const productSlice = createSlice({
     setProducts(state, action: PayloadAction<Product[]>) {
       state.products = action.payload;
     },
-
-    setPagination(
-      state,
-      action: PayloadAction<{ currentPage: number; totalPages: number }>
-    ) {
-      state.currentPage = action.payload.currentPage;
-      state.totalPages = action.payload.totalPages;
+    setPage(state, action) {
+      state.page = action.payload;
     },
-
-    setItemsPerPage(state, action: PayloadAction<number>) {
-      state.itemsPerPage = action.payload;
+    setPageSize(state, action) {
+      state.pageSize = action.payload;
     },
   },
 });
 
-export const {
-  addProduct,
-  deleteProduct,
-  setProducts,
-  setPagination,
-  setItemsPerPage,
-} = productSlice.actions;
+export const { addProduct, deleteProduct, setProducts, setPage, setPageSize } =
+  productSlice.actions;
 export default productSlice.reducer;
