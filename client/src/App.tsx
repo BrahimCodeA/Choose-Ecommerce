@@ -17,6 +17,7 @@ import List from "@/pages/admin/ListProduct/ListProduct";
 import AdminLayout from "@/pages/admin/AdminLayout/AdminLayout";
 import NotFound from "./pages/NotFound/NotFound";
 import { ToastContainer } from "react-toastify";
+import Cookie from "./components/Cookie/Cookie";
 
 function App() {
   const user = useSelector((state: RootState) => state.user.user);
@@ -24,6 +25,8 @@ function App() {
   return (
     <>
       <ToastContainer />
+      <Cookie />
+
       <Routes>
         <Route
           path="/*"
