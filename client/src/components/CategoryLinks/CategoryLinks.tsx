@@ -1,4 +1,4 @@
-import "./CategoryPages.scss";
+import "./CategoryLinks.scss";
 import men from "@/assets/Home-Men.jpg";
 import women from "@/assets/Home-Women.avif";
 import kid from "@/assets/Home-Kid.jpg";
