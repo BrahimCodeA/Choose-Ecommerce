@@ -1,11 +1,11 @@
 .isDiscounted-container {
-  padding: 1rem;
-  background-color: #fff;
-  color: #000;
+  padding: 2rem 1rem;
+  margin: 5rem auto;
+  width: 100%;
+  max-width: 1200px;
 
   h2 {
     font-size: 2rem;
-    margin-left: 5%;
     color: #333;
     margin-bottom: 1.5rem;
   }
@@ -21,97 +21,37 @@
       display: flex;
       flex-direction: column;
       cursor: pointer;
-
-      .isDiscounted-image-wrapper {
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        height: auto;
-
-        .isDiscounted-image {
-          width: 100%;
-          height: auto;
-        }
-
-        .promo-label {
-          display: flex;
-          align-items: center;
-          position: absolute;
-          top: 10%;
-          left: 10%;
-          background-color: rgba(255, 0, 0, 0.8);
-          color: #fff;
-          padding: 0.5rem 1rem;
-          font-size: 1rem;
-          font-weight: bold;
-          text-transform: uppercase;
-          border-radius: 5px;
-
-          svg {
-            margin-left: 3px;
-          }
-        }
-      }
-
-      h3 {
-        font-size: 1rem;
-        color: #000;
-      }
-
-      p {
-        font-size: 0.9rem;
-
-        .original-price {
-          text-decoration: line-through;
-          color: #888;
-        }
-
-        .discounted-price {
-          font-weight: bold;
-          color: #000;
-          margin-left: 0.5rem;
-        }
-      }
     }
+  }
+
+  .no-products {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 2rem;
   }
 
   @media (min-width: 768px) {
-    h2 {
-      font-size: 3rem;
-      margin-left: 10%;
-    }
-
-    div {
-      gap: 1.5rem;
-      justify-content: center;
-      width: 100%;
-    }
-
-    div div {
-      width: 500px;
-
-      h3 {
-        font-size: 1.3rem;
-      }
-
-      p {
-        font-size: 1.2rem;
-      }
-    }
-  }
-
-  @media (min-width: 1024px) {
     div {
       display: grid;
-      width: 1150px;
-      margin: 0 auto;
-      grid-template-columns: repeat(4, 1fr);
+      width: 100%;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 1.5rem;
       overflow-x: unset;
     }
 
     div div {
       width: auto;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h2 {
+      font-size: 2.5rem;
+    }
+
+    div {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 }
