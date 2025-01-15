@@ -3,11 +3,7 @@ import { useProductList } from "@/hooks/useProductList";
 import { usePagination } from "@/hooks/usePagination";
 import Pagination from "../Pagination/Pagination";
 import { Card } from "../ui/Card";
-
-type FilteredProductsProps = {
-  category: string;
-  title?: string;
-};
+import { FilteredProductsProps } from "@/types/filteredTypes";
 
 export const FilteredProducts = ({
   category,
@@ -34,7 +30,9 @@ export const FilteredProducts = ({
                   <Card
                     image={product.image?.[0]}
                     title={product.name}
-                    price={`À partir de ${product.price}€`}
+                    price={`${product.price}`}
+                    discountPrice={product.discountPrice}
+                    promo={product.promo}
                   />
                 </div>
               </div>
