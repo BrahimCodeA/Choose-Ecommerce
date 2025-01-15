@@ -22,26 +22,13 @@ export const DiscountedProducts = () => {
         <div>
           {discountedProducts.length > 0 ? (
             itemsToDisplay.map((product) => {
-              const discountPrice = product.discountAmount
-                ? (product.price * (1 - product.discountAmount / 100)).toFixed(
-                    2
-                  )
-                : undefined;
-
               return (
                 <Card
-                  key={product._id}
                   image={product.image?.[0]}
                   title={product.name}
-                  price={`${product.price}€`}
-                  discountPrice={
-                    discountPrice ? `${discountPrice}€` : undefined
-                  }
-                  promo={
-                    <span>
-                      En promo <MdDiscount />
-                    </span>
-                  }
+                  price={`${product.price}`}
+                  discountPrice={product.discountPrice}
+                  promo={product.promo}
                 />
               );
             })
