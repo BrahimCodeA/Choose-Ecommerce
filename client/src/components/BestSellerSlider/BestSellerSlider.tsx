@@ -1,10 +1,10 @@
-import "./BestSellerSlider.scss";
+import { useProductList } from "@/hooks/useProductList";
+import { Card } from "../ui/Card";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useProductList } from "@/hooks/useProductList";
 import { sliderBestSellerSettings } from "@/config/sliderBestSellerSettings";
-import { Card } from "../ui/Card";
+import "./BestSellerSlider.scss";
 
 export const BestSellerSlider = () => {
   const products = useProductList();
@@ -21,7 +21,9 @@ export const BestSellerSlider = () => {
                 <Card
                   image={product.image?.[0]}
                   title={product.name}
-                  price={`À partir de ${product.price}€`}
+                  price={`${product.price}`}
+                  discountPrice={product.discountPrice}
+                  promo={product.promo}
                 />
               </div>
             ))}
