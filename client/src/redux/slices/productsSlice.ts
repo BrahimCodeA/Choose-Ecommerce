@@ -13,6 +13,8 @@ type Product = {
   isDiscounted: boolean;
   discountAmount: number;
   image: string[];
+  discountPrice?: string | null;
+  promo?: boolean;
 };
 
 type ProductState = {
@@ -42,12 +44,20 @@ const productSlice = createSlice({
     },
 
     setProducts(state, action: PayloadAction<Product[]>) {
-      state.products = action.payload;
+      state.products = action.payload.map((product) => ({
+        ...product,
+        discountPrice: product.discountAmount
+          ? (product.price * (1 - product.discountAmount / 100)).toFixed(2)
+          : null,
+        promo: product.discountAmount > 0,
+      }));
     },
-    setPage(state, action) {
+
+    setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
     },
-    setPageSize(state, action) {
+
+    setPageSize(state, action: PayloadAction<number>) {
       state.pageSize = action.payload;
     },
   },
