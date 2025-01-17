@@ -11,19 +11,12 @@ import SliderNavTwo from "../SliderNavTwo/SliderNavTwo";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
 
 export default function Header() {
-  const [openSearch, setOpenSearch] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const [openSearch, setOpenSearch] = useState(false);
   const isDesktop = useIsDesktop();
 
-  const toggleSearch = () => setOpenSearch((prev) => !prev);
   const toggleMenu = () => setOpenMenu((prev) => !prev);
-
-  const renderSearchIcon = () =>
-    openSearch ? (
-      <Search onCloseSearch={toggleSearch} />
-    ) : (
-      <BiSearchAlt className="search-icon" onClick={toggleSearch} />
-    );
+  const toggleSearch = () => setOpenSearch((prev) => !prev);
 
   const renderMenuIcon = () =>
     !isDesktop &&
@@ -42,7 +35,7 @@ export default function Header() {
         {isDesktop && <Navbar onCloseMenu={toggleMenu} />}
 
         <div className="icons">
-          {renderSearchIcon()}
+          <BiSearchAlt className="search-icon" onClick={toggleSearch} />
           <AuthMenu />
           <Link to="/cart">
             <CiShoppingBasket className="panier-icon" />
@@ -51,6 +44,7 @@ export default function Header() {
         </div>
       </nav>
 
+      <Search openSearch={openSearch} onCloseSearch={toggleSearch} />
       <SliderNavTwo />
     </header>
   );
