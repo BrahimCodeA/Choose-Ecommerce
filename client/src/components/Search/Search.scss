@@ -8,14 +8,15 @@
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  opacity: 0;
   z-index: 1000;
-  transition: 0.4s ease-in-out;
-  animation: slideIn 0.9s ease-in-out;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   &.show {
+    transform: translateY(0);
     opacity: 1;
-    transition: 0.4s ease-in-out;
   }
 
   .header {
@@ -63,13 +64,6 @@
     width: 100%;
     display: flex;
     justify-content: center;
-  }
-
-  p {
-    margin-top: 2rem;
-    font-size: 1.2rem;
-    color: gray;
-    text-align: center;
   }
 
   input {
