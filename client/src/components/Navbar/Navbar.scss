@@ -8,7 +8,7 @@
   z-index: 1000;
   padding: 6rem 2rem;
   font-size: 2.5rem;
-  transition: transform 0.3s ease;
+  animation: slideInLeft 0.4s ease;
 
   .icon-menu-closed {
     position: absolute;
