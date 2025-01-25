@@ -1,36 +1,37 @@
 import "./FilteredProducts.scss";
-import { useProductList } from "@/hooks/useProductList";
-import { usePagination } from "@/hooks/usePagination";
 import Pagination from "../Pagination/Pagination";
 import { Card } from "../ui/Card";
 import { FilteredProductsProps } from "@/types/filteredTypes";
 import { Button } from "../ui/Button";
 import { FilterProductMenu } from "../FilterProductMenu/FilterProductMenu";
-import { useState } from "react";
 import { BsFilterLeft } from "react-icons/bs";
+import { useFilteredProducts } from "@/hooks/useFilteredProducts";
+import { useState } from "react";
 
 export const FilteredProducts = ({
   category,
   title,
 }: FilteredProductsProps) => {
   const [openMenuFilter, setOpenMenuFilter] = useState(false);
-  const products = useProductList();
-  const filteredProducts =
-    products?.filter((product) => product.category === category) || [];
+  const {
+    itemsToDisplay,
+    page,
+    totalPages,
+    handlePageChange,
+    setIsPromoFilterActive,
+    setSearchQuery,
+  } = useFilteredProducts(category);
 
-  const { itemsToDisplay, page, totalPages, handlePageChange } = usePagination(
-    filteredProducts,
-    8
-  );
-
-  const handleMenuFilter = () => {
-    setOpenMenuFilter(!openMenuFilter);
-  };
+  const handleMenuFilter = () => setOpenMenuFilter(!openMenuFilter);
 
   return (
     <>
       <div className={`filter-sidebar ${openMenuFilter ? "show" : ""}`}>
-        <FilterProductMenu onClose={handleMenuFilter} />
+        <FilterProductMenu
+          onClose={handleMenuFilter}
+          onPromoFilterChange={setIsPromoFilterActive}
+          onSearchChange={setSearchQuery}
+        />
       </div>
       <section className="filtered-products-container">
         <h2>{title || category}</h2>
@@ -38,7 +39,7 @@ export const FilteredProducts = ({
           Filtres <BsFilterLeft />
         </Button>
         <div>
-          {filteredProducts.length > 0 ? (
+          {itemsToDisplay.length > 0 ? (
             itemsToDisplay.map((product) => (
               <div key={product._id}>
                 <div className="filtered-products-image-wrapper">
