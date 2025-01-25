@@ -1,5 +1,4 @@
 import "./DiscountedProducts.scss";
-import { MdDiscount } from "react-icons/md";
 import { useProductList } from "@/hooks/useProductList";
 import { usePagination } from "@/hooks/usePagination";
 import Pagination from "../Pagination/Pagination";
