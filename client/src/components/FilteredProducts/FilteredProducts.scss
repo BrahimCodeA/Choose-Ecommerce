@@ -32,12 +32,12 @@
   }
 
   .filter-button {
-    background-color: #666;
+    background-color: #222;
     color: #fff;
     border: none;
     border-radius: 4px;
     padding: 0.5rem 1rem;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
@@ -69,6 +69,11 @@
   }
 
   @media (min-width: 768px) {
+    .filter-button {
+      padding: 0.7rem 1.5rem;
+      font-size: 1.4rem;
+    }
+
     h2 {
       font-size: 2rem;
     }
