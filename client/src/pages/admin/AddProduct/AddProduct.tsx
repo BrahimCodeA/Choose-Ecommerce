@@ -8,6 +8,7 @@ import { ImageUploader } from "@/components/ui/ImageUploader";
 import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/Button";
 import cloudImage from "@/assets/cloudUpload.png";
+import { sizesOptions } from "@/constants/sizesOptions";
 
 export default function AddProduct() {
   const {
@@ -107,10 +108,7 @@ export default function AddProduct() {
         <Select
           placeholder="Tailles disponibles"
           value={sizes.length === 0 ? "" : sizes[sizes.length - 1]}
-          options={Array.from({ length: 16 }, (_, i) => ({
-            value: 30 + i,
-            label: `${30 + i}`,
-          }))}
+          options={sizesOptions}
           onChange={(e) => handleAddSize(Number(e.target.value))}
           className="custom-select"
         />
