@@ -8,6 +8,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export const Button = ({
   children,
+  title,
   icon,
   loading = false,
   className = "",
@@ -15,6 +16,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button className={className} {...props}>
+      {title && <span className="button-title">{title}</span>}
       {icon && <span className="button-icon">{icon}</span>}
       {loading ? "Chargement..." : children}
     </button>
