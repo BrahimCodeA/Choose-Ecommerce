@@ -43,13 +43,10 @@ export const useAddProduct = () => {
     }
   };
 
-  const handleRemoveSize = (size: number) => {
+  const handleRemoveSize = (size: number) =>
     setSizes((prevSizes) => prevSizes.filter((s) => s !== size));
-  };
 
-  const handleRomveAllSizes = () => {
-    setSizes([]);
-  };
+  const handleRomveAllSizes = () => setSizes([]);
 
   const handleDiscountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
