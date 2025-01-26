@@ -13,6 +13,7 @@ export const FilteredProducts = ({
   title,
 }: FilteredProductsProps) => {
   const [openMenuFilter, setOpenMenuFilter] = useState(false);
+
   const {
     itemsToDisplay,
     page,
@@ -20,6 +21,7 @@ export const FilteredProducts = ({
     handlePageChange,
     setIsPromoFilterActive,
     setSearchQuery,
+    setSortOrder,
   } = useFilteredProducts(category);
 
   const handleMenuFilter = () => setOpenMenuFilter(!openMenuFilter);
@@ -31,6 +33,7 @@ export const FilteredProducts = ({
           onClose={handleMenuFilter}
           onPromoFilterChange={setIsPromoFilterActive}
           onSearchChange={setSearchQuery}
+          onSortChange={setSortOrder}
         />
       </div>
       <section className="filtered-products-container">
