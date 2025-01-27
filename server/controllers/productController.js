@@ -95,8 +95,17 @@ const removeProduct = async (req, res) => {
 
 const singleProduct = async (req, res) => {
   try {
-    const { productId } = req.body;
-    const product = await productModel.findById(productId);
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ success: false, message: "ID manquant" });
+    }
+
+    const product = await productModel.findById(id);
+    if (!product) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Produit introuvable" });
+    }
     res.status(200).json({ success: true, product });
   } catch (error) {
     console.error(error);
