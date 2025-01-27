@@ -47,6 +47,7 @@ export const FilteredProducts = ({
               <div key={product._id}>
                 <div className="filtered-products-image-wrapper">
                   <Card
+                    id={product._id}
                     image={product.image?.[0]}
                     title={product.name}
                     price={`${product.price}`}

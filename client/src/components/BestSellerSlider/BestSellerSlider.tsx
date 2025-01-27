@@ -19,6 +19,7 @@ export const BestSellerSlider = () => {
             {bestsellers.map((product) => (
               <div key={product._id}>
                 <Card
+                  id={product._id}
                   image={product.image?.[0]}
                   title={product.name}
                   price={`${product.price}`}

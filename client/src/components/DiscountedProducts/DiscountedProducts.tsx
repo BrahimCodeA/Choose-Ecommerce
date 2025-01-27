@@ -23,6 +23,8 @@ export const DiscountedProducts = () => {
             itemsToDisplay.map((product) => {
               return (
                 <Card
+                  key={product._id}
+                  id={product._id}
                   image={product.image?.[0]}
                   title={product.name}
                   price={`${product.price}`}
