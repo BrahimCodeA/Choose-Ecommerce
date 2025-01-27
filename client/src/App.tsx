@@ -18,6 +18,7 @@ import AdminLayout from "@/pages/admin/AdminLayout/AdminLayout";
 import NotFound from "./pages/NotFound/NotFound";
 import { ToastContainer } from "react-toastify";
 import Cookie from "./components/Cookie/Cookie";
+import SingleProduct from "./pages/SingleProduct/SingleProduct";
 
 function App() {
   const user = useSelector((state: RootState) => state.user.user);
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/men" element={<Men />} />
                 <Route path="/women" element={<Women />} />
                 <Route path="/kid" element={<Kid />} />
+                <Route path="/product/:id" element={<SingleProduct />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <Footer />
