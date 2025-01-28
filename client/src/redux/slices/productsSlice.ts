@@ -1,21 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
-type Product = {
-  _id: string;
-  name: string;
-  description: string;
-  price: number;
-  stock: boolean;
-  category: string;
-  brand: string;
-  sizes: number[];
-  bestseller: boolean;
-  isDiscounted: boolean;
-  discountAmount: number;
-  image: string[];
-  discountPrice?: string | null;
-  promo?: boolean;
-};
+import { calculateDiscountedProduct } from "@/constants/calculateDiscountedProduct";
+import { Product } from "@/types/productType";
 
 type ProductState = {
   products: Product[];
@@ -36,7 +21,7 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     addProduct(state, action: PayloadAction<Product>) {
-      state.products.push(action.payload);
+      state.products.push(calculateDiscountedProduct(action.payload));
     },
 
     deleteProduct(state, action: PayloadAction<string>) {
@@ -46,17 +31,13 @@ const productSlice = createSlice({
     },
 
     setProducts(state, action: PayloadAction<Product[]>) {
-      state.products = action.payload.map((product) => ({
-        ...product,
-        discountPrice: product.discountAmount
-          ? (product.price * (1 - product.discountAmount / 100)).toFixed(2)
-          : null,
-        promo: product.discountAmount > 0,
-      }));
+      state.products = action.payload.map(calculateDiscountedProduct);
     },
 
     setSelectedProduct(state, action: PayloadAction<Product | null>) {
-      state.selectedProduct = action.payload;
+      state.selectedProduct = action.payload
+        ? calculateDiscountedProduct(action.payload)
+        : null;
     },
 
     setPage(state, action: PayloadAction<number>) {
