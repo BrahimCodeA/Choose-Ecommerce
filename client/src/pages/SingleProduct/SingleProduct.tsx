@@ -3,17 +3,24 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import useSingleProduct from "@/hooks/useSingleProduct";
+import { useState } from "react";
+import { Button } from "@/components/ui/Button";
 
 const SingleProduct = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { id } = useParams<{ id: string }>();
-  useSingleProduct(id!);
+  if (!id) return null;
+  useSingleProduct(id);
 
   const product = useSelector(
     (state: RootState) => state.product.selectedProduct
   );
 
-  if (!product)
-    return <p className="loading-text">Loading product details...</p>;
+  if (!product) return <p className="loading-text">Chargement du produit...</p>;
+
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="single-product-container">
@@ -25,21 +32,35 @@ const SingleProduct = () => {
         />
       </div>
       <div className="product-details">
-        <h1 className="product-title">{product.name}</h1>
-        <p className="product-description">{product.description}</p>
+        <h2 className="product-title">{product.name}</h2>
         <div className="product-price-info">
-          <p className="product-price">€{product.price}</p>
-          {product.isDiscounted && (
-            <p className="product-discounted-price">
-              Now: €{product.discountPrice}
-            </p>
+          <p
+            className={`${
+              product.isDiscounted ? "product-discounted" : "product-price"
+            }`}
+          >
+            {product.price}€
+          </p>
+          {product.isDiscounted && product.discountPrice && (
+            <p className="product-discounted-price">{product.discountPrice}€</p>
           )}
         </div>
-        <p className="product-category">Category: {product.category}</p>
-        <p className="product-brand">Brand: {product.brand}</p>
-        <p className="product-sizes">
-          Available Sizes: {product.sizes.join(", ")}
-        </p>
+        <p>- Choisissez une taille -</p>
+        <div className="product-sizes">
+          {product.sizes.map((size, index) => (
+            <span key={index} className="product-size">
+              {size}
+            </span>
+          ))}
+        </div>
+
+        <Button
+          onClick={handleOpen}
+          className="product-button"
+          title={isOpen ? "Cacher la description" : "Voir la description"}
+        />
+        <Button className="cart-link" title="Ajouter au panier" />
+        {isOpen && <p className="product-description">{product.description}</p>}
       </div>
     </div>
   );
