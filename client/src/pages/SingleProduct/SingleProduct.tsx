@@ -18,9 +18,7 @@ const SingleProduct = () => {
 
   if (!product) return <p className="loading-text">Chargement du produit...</p>;
 
-  const handleOpen = () => {
-    setIsOpen(!isOpen);
-  };
+  const handleOpen = () => setIsOpen(!isOpen);
 
   return (
     <div className="single-product-container">
