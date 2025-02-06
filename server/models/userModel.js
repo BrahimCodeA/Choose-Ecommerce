@@ -1,32 +1,36 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
+const cartItemSchema = new mongoose.Schema(
+  {
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      required: true,
+    },
+    quantity: { type: Number, required: true, min: 1 },
+    price: { type: Number, required: true },
+    name: { type: String, required: true },
+    image: { type: Array, required: true },
+  },
+  { _id: false }
+);
+
 const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
     password: {
       type: String,
       required: true,
-      minlength: [6, "Le mot de passe doit avoir au minimum 6 caractéres"],
+      minlength: [6, "Le mot de passe doit avoir au minimum 6 caractères"],
       trim: true,
     },
-    cartItem: [
-      {
-        quantity: {
-          type: Number,
-          default: 1,
-        },
-        products: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
-        },
-      },
-    ],
     role: {
       type: String,
       enum: ["customer", "admin"],
       default: "customer",
     },
+    cart: [cartItemSchema],
   },
   { timestamps: true }
 );
