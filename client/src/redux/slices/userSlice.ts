@@ -1,21 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type User = {
-  id: string;
+  _id: string;
   email: string;
   role: "admin" | "user";
+  cart: CartItem[];
+};
+
+type CartItem = {
+  productId: string;
+  quantity: number;
+  price: number;
 };
 
 type UserState = {
   user: User | null;
   loading: boolean;
   error: string | null;
+  totalPrice: number;
 };
 
 const initialState: UserState = {
   user: null,
   loading: false,
   error: null,
+  totalPrice: 0,
 };
 
 const userSlice = createSlice({
@@ -28,8 +37,14 @@ const userSlice = createSlice({
     },
     signUpSuccess(state, action: PayloadAction<User>) {
       state.loading = false;
-      state.user = action.payload;
+      state.user = {
+        _id: action.payload._id,
+        email: action.payload.email,
+        role: action.payload.role,
+        cart: action.payload.cart || [],
+      };
       state.error = null;
+      state.totalPrice = calculateTotalPrice(action.payload.cart);
     },
     signUpFailure(state, action: PayloadAction<string>) {
       state.loading = false;
@@ -41,8 +56,12 @@ const userSlice = createSlice({
     },
     signInSuccess(state, action: PayloadAction<User>) {
       state.loading = false;
-      state.user = action.payload;
+      state.user = {
+        ...action.payload,
+        cart: action.payload.cart || [],
+      };
       state.error = null;
+      state.totalPrice = calculateTotalPrice(action.payload.cart);
     },
     signInFailure(state, action: PayloadAction<string>) {
       state.loading = false;
@@ -50,9 +69,61 @@ const userSlice = createSlice({
     },
     logoutUser(state) {
       state.user = null;
+      state.totalPrice = 0;
+    },
+
+    addToCart(state, action: PayloadAction<CartItem>) {
+      if (state.user) {
+        const itemIndex = state.user.cart.findIndex(
+          (item) => item.productId === action.payload.productId
+        );
+        if (itemIndex >= 0) {
+          state.user.cart[itemIndex].quantity += action.payload.quantity;
+        } else {
+          state.user.cart.push(action.payload);
+        }
+        state.totalPrice = calculateTotalPrice(state.user.cart);
+      }
+    },
+    removeFromCart(state, action: PayloadAction<string>) {
+      if (state.user) {
+        state.user.cart = state.user.cart.filter(
+          (item) => item.productId !== action.payload
+        );
+        state.totalPrice = calculateTotalPrice(state.user.cart);
+      }
+    },
+    updateCartItemQuantity(
+      state,
+      action: PayloadAction<{
+        productId: string;
+        quantity: number;
+        change: number;
+      }>
+    ) {
+      if (state.user) {
+        const itemIndex = state.user.cart.findIndex(
+          (item) => item.productId === action.payload.productId
+        );
+        if (itemIndex >= 0) {
+          const newQuantity =
+            state.user.cart[itemIndex].quantity + action.payload.change;
+
+          if (newQuantity > 0) {
+            state.user.cart[itemIndex].quantity = newQuantity;
+          }
+        }
+        state.totalPrice = calculateTotalPrice(state.user.cart);
+      }
     },
   },
 });
+
+const calculateTotalPrice = (cart: CartItem[]) => {
+  return cart.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+};
 
 export const {
   signUpRequest,
@@ -62,6 +133,9 @@ export const {
   signInSuccess,
   signInFailure,
   logoutUser,
+  addToCart,
+  removeFromCart,
+  updateCartItemQuantity,
 } = userSlice.actions;
 
 export default userSlice.reducer;
