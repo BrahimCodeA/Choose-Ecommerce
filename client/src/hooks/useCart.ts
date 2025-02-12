@@ -1,22 +1,15 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import axios from "axios";
-import { showToast } from "@/utils/toastUtils";
-import { ToastType } from "@/utils/toastUtils";
-
-type CartItem = {
-  productId: string;
-  name: string;
-  image: string;
-  quantity: number;
-  price: number;
-};
+import { showToast, ToastType } from "@/utils/toastUtils";
+import { setCart } from "@/redux/slices/userSlice";
 
 const useCart = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user);
-  const [cart, setCart] = useState<CartItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const cart = user?.cart || [];
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
@@ -26,7 +19,7 @@ const useCart = () => {
     const fetchCart = async () => {
       try {
         const response = await axios.get(`/api/cart/${user._id}`);
-        setCart(response.data.cart);
+        dispatch(setCart(response.data.cart));
       } catch (err) {
         setError("Erreur lors de la récupération du panier");
       } finally {
@@ -35,7 +28,7 @@ const useCart = () => {
     };
 
     fetchCart();
-  }, [user]);
+  }, [user, dispatch]);
 
   const removeItemFromCart = async (productId: string) => {
     if (!user) return;
@@ -44,10 +37,9 @@ const useCart = () => {
       const response = await axios.delete(`/api/cart/remove`, {
         data: { userId: user._id, productId },
       });
-      setCart((prevCart) =>
-        prevCart.filter((item) => item.productId !== productId)
-      );
+
       if (response.status === 200) {
+        dispatch(setCart(cart.filter((item) => item.productId !== productId)));
         showToast("Produit supprimé du panier", ToastType.SUCCESS);
       } else {
         setError("Erreur lors de la suppression de l'élément");
@@ -82,11 +74,13 @@ const useCart = () => {
           });
 
           if (response.status === 200) {
-            setCart((prevCart) =>
-              prevCart.map((item) =>
-                item.productId === productId
-                  ? { ...item, quantity: newQuantity }
-                  : item
+            dispatch(
+              setCart(
+                cart.map((item) =>
+                  item.productId === productId
+                    ? { ...item, quantity: newQuantity }
+                    : item
+                )
               )
             );
             showToast("Quantité mise à jour", ToastType.SUCCESS);
@@ -121,8 +115,9 @@ const useCart = () => {
       const response = await axios.delete(`/api/cart/clear`, {
         data: { userId: user._id },
       });
+
       if (response.status === 200) {
-        setCart([]);
+        dispatch(setCart([]));
         showToast("Panier vidé avec succès", ToastType.SUCCESS);
       } else {
         setError("Erreur lors de la suppression du panier");
@@ -135,11 +130,9 @@ const useCart = () => {
     }
   };
 
-  const calculateTotalPrice = (cart: CartItem[]) => {
+  const calculateTotalPrice = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
-
-  const totalPrice = calculateTotalPrice(cart);
 
   return {
     cart,
@@ -149,6 +142,7 @@ const useCart = () => {
     removeItemFromCart,
     updateQuantity,
     clearCart,
+    totalPrice: calculateTotalPrice(),
   };
 };
 
