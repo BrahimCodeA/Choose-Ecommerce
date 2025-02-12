@@ -9,11 +9,14 @@ import { Link } from "react-router-dom";
 import AuthMenu from "../AuthMenu/AuthMenu";
 import SliderNavTwo from "../SliderNavTwo/SliderNavTwo";
 import { useIsDesktop } from "@/hooks/useIsDesktop";
+import useCart from "@/hooks/useCart";
 
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
   const isDesktop = useIsDesktop();
+
+  const { cart } = useCart();
 
   const toggleMenu = () => setOpenMenu((prev) => !prev);
   const toggleSearch = () => setOpenSearch((prev) => !prev);
@@ -39,6 +42,7 @@ export default function Header() {
           <AuthMenu />
           <Link to="/cart">
             <CiShoppingBasket className="panier-icon" />
+            {cart.length > 0 && <span>{cart.length}</span>}
           </Link>
           {renderMenuIcon()}
         </div>
