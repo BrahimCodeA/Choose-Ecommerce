@@ -7,8 +7,10 @@ type User = {
   cart: CartItem[];
 };
 
-type CartItem = {
+export type CartItem = {
   productId: string;
+  name: string;
+  image: string;
   quantity: number;
   price: number;
 };
@@ -79,6 +81,13 @@ const userSlice = createSlice({
         }
       }
     },
+
+    setCart(state, action: PayloadAction<CartItem[]>) {
+      if (state.user) {
+        state.user.cart = action.payload;
+      }
+    },
+
     removeFromCart(state, action: PayloadAction<string>) {
       if (state.user) {
         state.user.cart = state.user.cart.filter(
@@ -120,6 +129,7 @@ export const {
   signInFailure,
   logoutUser,
   addToCart,
+  setCart,
   removeFromCart,
   updateCartItemQuantity,
 } = userSlice.actions;
