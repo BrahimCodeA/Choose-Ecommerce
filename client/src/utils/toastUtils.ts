@@ -14,7 +14,7 @@ export const showToast = (
 ) => {
   toast[type](message, {
     position: "top-right",
-    autoClose: 2000,
+    autoClose: 1000,
     style: {
       backgroundColor: "#282c34",
       color: "#ffffff",
