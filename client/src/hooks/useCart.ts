@@ -3,12 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import axios from "axios";
 import { showToast, ToastType } from "@/utils/toastUtils";
-import { setCart } from "@/redux/slices/userSlice";
+import {
+  setCart,
+  removeFromCart,
+  updateCartItemQuantity,
+} from "@/redux/slices/cartSlice";
 
 const useCart = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user);
-  const cart = user?.cart || [];
+  const cart = useSelector((state: RootState) => state.cart.cart);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -20,8 +25,9 @@ const useCart = () => {
       try {
         const response = await axios.get(`/api/cart/${user._id}`);
         dispatch(setCart(response.data.cart));
-      } catch (err) {
-        setError("Erreur lors de la récupération du panier");
+      } catch (err: any) {
+        setError(`Erreur lors de la récupération du panier: ${err.message}`);
+        console.error("Erreur lors de la récupération du panier:", err);
       } finally {
         setLoading(false);
       }
@@ -29,6 +35,28 @@ const useCart = () => {
 
     fetchCart();
   }, [user, dispatch]);
+
+  const addToCart = async (
+    userId: string,
+    productId: string,
+    quantity: number
+  ): Promise<void> => {
+    if (!user) return;
+
+    try {
+      const response = await axios.post("/api/cart/add", {
+        userId,
+        productId,
+        quantity,
+      });
+
+      dispatch(setCart([...cart, response.data]));
+      showToast("Produit ajouté au panier !", ToastType.SUCCESS);
+    } catch (error) {
+      console.error("Erreur lors de l'ajout au panier :", error);
+      showToast("Erreur lors de l'ajout au panier", ToastType.ERROR);
+    }
+  };
 
   const removeItemFromCart = async (productId: string) => {
     if (!user) return;
@@ -39,14 +67,10 @@ const useCart = () => {
       });
 
       if (response.status === 200) {
-        dispatch(setCart(cart.filter((item) => item.productId !== productId)));
+        dispatch(removeFromCart(productId));
         showToast("Produit supprimé du panier", ToastType.SUCCESS);
       } else {
-        setError("Erreur lors de la suppression de l'élément");
-        showToast(
-          "Erreur lors de la suppression de l'élément",
-          ToastType.ERROR
-        );
+        throw new Error("Erreur lors de la suppression de l'élément");
       }
     } catch (error) {
       console.error("Erreur lors de la suppression de l'élément:", error);
@@ -60,49 +84,34 @@ const useCart = () => {
     setIsUpdating(true);
 
     const cartItem = cart.find((item) => item.productId === productId);
+    if (!cartItem) return;
 
-    if (cartItem) {
-      const newQuantity = cartItem.quantity + change;
+    const newQuantity = cartItem.quantity + change;
 
-      if (newQuantity >= 1) {
-        try {
-          const response = await axios.put(`/api/cart/update`, {
-            userId: user._id,
-            productId,
-            quantity: newQuantity,
-            change,
-          });
+    if (newQuantity >= 1) {
+      try {
+        const response = await axios.put(`/api/cart/update`, {
+          userId: user._id,
+          productId,
+          quantity: newQuantity,
+          change,
+        });
 
-          if (response.status === 200) {
-            dispatch(
-              setCart(
-                cart.map((item) =>
-                  item.productId === productId
-                    ? { ...item, quantity: newQuantity }
-                    : item
-                )
-              )
-            );
-            showToast("Quantité mise à jour", ToastType.SUCCESS);
-          } else {
-            showToast(
-              "Erreur lors de la mise à jour de la quantité",
-              ToastType.ERROR
-            );
-          }
-        } catch (error) {
-          console.error("Erreur lors de la mise à jour de la quantité:", error);
-          showToast(
-            "Erreur lors de la mise à jour de la quantité",
-            ToastType.ERROR
-          );
+        if (response.status === 200) {
+          dispatch(updateCartItemQuantity({ productId, change }));
+          showToast("Quantité mise à jour", ToastType.SUCCESS);
+        } else {
+          throw new Error("Erreur lors de la mise à jour de la quantité");
         }
-      } else {
+      } catch (error) {
+        console.error("Erreur lors de la mise à jour de la quantité:", error);
         showToast(
-          "La quantité ne peut pas être inférieure à 1",
+          "Erreur lors de la mise à jour de la quantité",
           ToastType.ERROR
         );
       }
+    } else {
+      showToast("La quantité ne peut pas être inférieure à 1", ToastType.ERROR);
     }
 
     setTimeout(() => setIsUpdating(false), 1000);
@@ -120,8 +129,7 @@ const useCart = () => {
         dispatch(setCart([]));
         showToast("Panier vidé avec succès", ToastType.SUCCESS);
       } else {
-        setError("Erreur lors de la suppression du panier");
-        showToast("Erreur lors de la suppression du panier", ToastType.ERROR);
+        throw new Error("Erreur lors de la suppression du panier");
       }
     } catch (err) {
       console.error("Erreur lors de la suppression du panier:", err);
@@ -131,7 +139,12 @@ const useCart = () => {
   };
 
   const calculateTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cart.reduce((total, item) => {
+      const itemPrice = item.isDiscounted
+        ? item.price - (item.price * item.discountAmount) / 100
+        : item.price;
+      return total + itemPrice * item.quantity;
+    }, 0);
   };
 
   return {
@@ -139,6 +152,7 @@ const useCart = () => {
     loading,
     error,
     user,
+    addToCart,
     removeItemFromCart,
     updateQuantity,
     clearCart,
