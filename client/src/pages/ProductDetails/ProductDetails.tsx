@@ -6,7 +6,7 @@ import useSingleProduct from "@/hooks/useProductDetails";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { ToastType, showToast } from "@/utils/toastUtils";
-import { useAddToCart } from "@/hooks/useAddToCart";
+import useCart from "@/hooks/useCart";
 
 const ProductDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,7 @@ const ProductDetails = () => {
     (state: RootState) => state.product.selectedProduct
   );
   const user = useSelector((state: RootState) => state.user.user);
-  const { addToCart } = useAddToCart();
+  const { addToCart } = useCart();
 
   if (!product) return <p className="erreur-text">Aucun produit...</p>;
 
@@ -42,7 +42,6 @@ const ProductDetails = () => {
 
     try {
       await addToCart(user._id, product._id, 1);
-      showToast("Produit ajouté au panier !", ToastType.SUCCESS);
     } catch (error) {
       showToast("Erreur lors de l'ajout au panier", ToastType.ERROR);
     }
