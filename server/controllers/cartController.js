@@ -10,12 +10,15 @@ export const addToCart = async (req, res) => {
       return res.status(404).json({ message: "Utilisateur non trouvé" });
     }
 
-    const product = await Product.findById(productId).populate(
-      "price name image"
+    const product = await Product.findById(productId).select(
+      "price name image isDiscounted discountAmount"
     );
-    if (!product) {
+    if (!product)
       return res.status(404).json({ message: "Produit non trouvé" });
-    }
+
+    const discountedPrice = product.isDiscounted
+      ? product.price - (product.price * product.discountAmount) / 100
+      : product.price;
 
     const existingCartItem = user.cart.find(
       (item) => item.productId.toString() === productId
@@ -27,9 +30,12 @@ export const addToCart = async (req, res) => {
       user.cart.push({
         productId,
         quantity,
-        price: product.price,
+        price: discountedPrice,
+        originalPrice: product.price,
         name: product.name,
         image: product.image[0],
+        isDiscounted: product.isDiscounted,
+        discountAmount: product.discountAmount,
       });
     }
 
