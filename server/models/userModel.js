@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
       enum: ["customer", "admin"],
       default: "customer",
     },
-    cart: [cartItemSchema],
+    cart: { type: [cartItemSchema], default: [] },
   },
   { timestamps: true }
 );
