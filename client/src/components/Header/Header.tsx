@@ -40,9 +40,11 @@ export default function Header() {
         <div className="icons">
           <BiSearchAlt className="search-icon" onClick={toggleSearch} />
           <AuthMenu />
-          <Link to="/cart">
-            <CiShoppingBasket className="panier-icon" />
-            {cart.length > 0 && <span>{cart.length}</span>}
+          <Link to="/cart" className="panier-icon">
+            <CiShoppingBasket />
+            {cart.length > 0 && (
+              <span className="cart-badge">{cart.length}</span>
+            )}
           </Link>
           {renderMenuIcon()}
         </div>
