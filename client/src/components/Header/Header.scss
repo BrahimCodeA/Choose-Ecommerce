@@ -40,6 +40,26 @@
         color: #f1c40f;
       }
     }
+
+    .panier-icon {
+      position: relative;
+
+      .cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        font-size: 0.8rem;
+        font-weight: bold;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+    }
   }
 }
 
