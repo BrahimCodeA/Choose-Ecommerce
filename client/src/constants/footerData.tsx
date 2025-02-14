@@ -55,17 +55,17 @@ export const footerData: FooterDataProps[] = [
     content: (
       <ul className="social-media">
         <li>
-          <a className="social-icon" href="https://facebook.com">
+          <a className="social-icon" href="#">
             <FaFacebookF />
           </a>
         </li>
         <li>
-          <a className="social-icon" href="https://instagram.com">
+          <a className="social-icon" href="#">
             <RiInstagramFill />
           </a>
         </li>
         <li>
-          <a className="social-icon" href="https://linkedin.com">
+          <a className="social-icon" href="#">
             <FaLinkedinIn />
           </a>
         </li>
