@@ -24,7 +24,7 @@ function App() {
   const user = useSelector((state: RootState) => state.user.user);
 
   return (
-    <>
+    <div className="app-container">
       <ToastContainer />
       <Cookie />
 
@@ -34,15 +34,17 @@ function App() {
           element={
             <>
               <Header />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/men" element={<Men />} />
-                <Route path="/women" element={<Women />} />
-                <Route path="/kid" element={<Kid />} />
-                <Route path="/product/:id" element={<ProductDetails />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+              <div className="main-content">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/men" element={<Men />} />
+                  <Route path="/women" element={<Women />} />
+                  <Route path="/kid" element={<Kid />} />
+                  <Route path="/product/:id" element={<ProductDetails />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
               <Footer />
             </>
           }
@@ -68,7 +70,7 @@ function App() {
       </Routes>
 
       <ScrollUp />
-    </>
+    </div>
   );
 }
 
