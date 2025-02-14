@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/Button";
 import "./Cart.scss";
 import useCart from "@/hooks/useCart";
-import { CiTrash } from "react-icons/ci";
-import caca from "@/assets/cart_notFound.png";
+import CartList from "./CartList";
+import CartTotal from "./CartTotal";
+import loginImage from "@/assets/cart_notFound.png";
 
 const Cart = () => {
   const {
@@ -23,7 +24,7 @@ const Cart = () => {
           Veuillez vous connecter pour voir votre panier
         </h2>
         <img
-          src={caca}
+          src={loginImage}
           alt="Veuillez vous connecter"
           className="cart__login-image"
         />
@@ -34,7 +35,6 @@ const Cart = () => {
   return (
     <section className="cart">
       <h2>Votre Panier</h2>
-
       {loading ? (
         <p className="cart__message">Chargement...</p>
       ) : error ? (
@@ -42,57 +42,13 @@ const Cart = () => {
       ) : cart.length > 0 ? (
         <>
           <div className="cart__list-container">
-            <ul className="cart__list">
-              {cart.map((item) => {
-                const discountPrice = item.isDiscounted
-                  ? item.price - (item.price * item.discountAmount) / 100
-                  : item.price;
-
-                return (
-                  <li key={item.productId} className="cart__item">
-                    <figure className="cart__image">
-                      <img src={item.image} alt={item.name} />
-                    </figure>
-                    <p className="cart__name">{item.name}</p>
-                    <span className="cart__price">
-                      {item.isDiscounted ? (
-                        <>
-                          <span className="cart__old-price">{item.price}€</span>
-                          <span className="cart__discount-price">
-                            {discountPrice.toFixed(2)}€
-                          </span>
-                        </>
-                      ) : (
-                        <span>{item.price}€</span>
-                      )}
-                    </span>
-                    <div className="cart__quantity">
-                      <Button
-                        className="cart__quantity-less"
-                        onClick={() => updateQuantity(item.productId, -1)}
-                        title="-"
-                      />
-                      <span>{item.quantity}</span>
-                      <Button
-                        className="cart__quantity-button-plus"
-                        onClick={() => updateQuantity(item.productId, 1)}
-                        title="+"
-                      />
-                    </div>
-                    <Button
-                      className="cart__remove"
-                      onClick={() => removeItemFromCart(item.productId)}
-                    >
-                      <CiTrash />
-                    </Button>
-                  </li>
-                );
-              })}
-            </ul>
+            <CartList
+              cart={cart}
+              updateQuantity={updateQuantity}
+              removeItemFromCart={removeItemFromCart}
+            />
           </div>
-          <div className="cart__total">
-            <p>Total: {totalPrice.toFixed(2)}€</p>
-          </div>
+          <CartTotal totalPrice={totalPrice} />
           <Button
             className="cart__clear-button"
             onClick={clearCart}
