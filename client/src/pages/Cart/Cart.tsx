@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/Button";
 import "./Cart.scss";
 import useCart from "@/hooks/useCart";
 import { CiTrash } from "react-icons/ci";
+import caca from "@/assets/cart_notFound.png";
 
 const Cart = () => {
   const {
@@ -17,9 +18,16 @@ const Cart = () => {
 
   if (!user) {
     return (
-      <h2 className="cart__message">
-        Veuillez vous connecter pour voir votre panier
-      </h2>
+      <>
+        <h2 className="cart__message">
+          Veuillez vous connecter pour voir votre panier
+        </h2>
+        <img
+          src={caca}
+          alt="Veuillez vous connecter"
+          className="cart__login-image"
+        />
+      </>
     );
   }
 
