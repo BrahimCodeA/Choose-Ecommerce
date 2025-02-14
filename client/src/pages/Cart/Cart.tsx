@@ -3,7 +3,7 @@ import "./Cart.scss";
 import useCart from "@/hooks/useCart";
 import CartList from "./CartList";
 import CartTotal from "./CartTotal";
-import loginImage from "@/assets/cart_notFound.png";
+import CartNotFound from "./CartNotFound";
 
 const Cart = () => {
   const {
@@ -18,18 +18,7 @@ const Cart = () => {
   } = useCart();
 
   if (!user) {
-    return (
-      <>
-        <h2 className="cart__message">
-          Veuillez vous connecter pour voir votre panier
-        </h2>
-        <img
-          src={loginImage}
-          alt="Veuillez vous connecter"
-          className="cart__login-image"
-        />
-      </>
-    );
+    return <CartNotFound />;
   }
 
   return (
