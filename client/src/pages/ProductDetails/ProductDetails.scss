@@ -157,6 +157,20 @@
   }
 }
 
+.product-not-found {
+  text-align: center;
+
+  .erreur-text {
+    text-align: center;
+    margin-top: 5rem;
+  }
+
+  img {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
 @media (min-width: 768px) {
   .single-product-container {
     flex-direction: row;
