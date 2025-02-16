@@ -2,13 +2,13 @@ import "./ListProduct.scss";
 import { Button } from "@/components/ui/Button";
 import { RiChatDeleteFill } from "react-icons/ri";
 import { useProductList } from "@/hooks/useProductList";
-import { useProductActions } from "@/hooks/useProductActions";
+import { useRemoveProduct } from "@/hooks/useRemoveProduct";
 import Pagination from "@/components/Pagination/Pagination";
 import { usePagination } from "@/hooks/usePagination";
 
 export default function ListProduct() {
   const products = useProductList();
-  const { removeProduct } = useProductActions();
+  const { removeProduct } = useRemoveProduct();
   const { itemsToDisplay, page, totalPages, handlePageChange } = usePagination(
     products,
     8
