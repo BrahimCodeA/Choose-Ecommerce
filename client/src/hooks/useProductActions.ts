@@ -1,21 +1,50 @@
-import { deleteProduct } from "@/redux/slices/productsSlice";
+import { useState } from "react";
 import { ToastType, showToast } from "@/utils/toastUtils";
-import axios from "axios";
-import { useDispatch } from "react-redux";
+import useCart from "@/hooks/useCart";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
-export const useProductActions = () => {
-  const dispatch = useDispatch();
+const useProductActions = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedSize, setSelectedSize] = useState("");
 
-  const removeProduct = async (id: string) => {
+  const { addToCart } = useCart();
+
+  const product = useSelector(
+    (state: RootState) => state.product.selectedProduct
+  );
+  const user = useSelector((state: RootState) => state.user.user);
+
+  const toggleDescription = () => setIsOpen((prev) => !prev);
+  const selectSize = (size: string) => setSelectedSize(size);
+
+  const handleAddToCartClick = async () => {
+    if (!user)
+      return showToast(
+        "Veuillez vous connecter pour ajouter au panier",
+        ToastType.ERROR
+      );
+
+    if (!product) return showToast("Produit introuvable", ToastType.ERROR);
+    if (!selectedSize)
+      return showToast("Veuillez sélectionner une taille", ToastType.WARNING);
+
     try {
-      await axios.delete(`/api/product/remove/${id}`);
-      dispatch(deleteProduct(id));
-      showToast("Produit supprimé", ToastType.SUCCESS);
+      await addToCart(user._id, product._id, 1);
     } catch (error) {
-      console.log(error);
-      showToast("Erreur lors de la suppression", ToastType.ERROR);
+      showToast("Erreur lors de l'ajout au panier", ToastType.ERROR);
     }
   };
 
-  return { removeProduct };
+  return {
+    user,
+    product,
+    isOpen,
+    selectedSize,
+    toggleDescription,
+    selectSize,
+    handleAddToCartClick,
+  };
 };
+
+export default useProductActions;
