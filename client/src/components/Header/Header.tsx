@@ -16,7 +16,7 @@ export default function Header() {
   const [openSearch, setOpenSearch] = useState(false);
   const isDesktop = useIsDesktop();
 
-  const { cart } = useCart();
+  const { cart, user } = useCart();
 
   const toggleMenu = () => setOpenMenu((prev) => !prev);
   const toggleSearch = () => setOpenSearch((prev) => !prev);
@@ -42,7 +42,7 @@ export default function Header() {
           <AuthMenu />
           <Link to="/cart" className="panier-icon">
             <CiShoppingBasket />
-            {cart.length > 0 && (
+            {user && cart.length > 0 && (
               <span className="cart-badge">{cart.length}</span>
             )}
           </Link>
