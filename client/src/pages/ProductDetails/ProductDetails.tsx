@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import useSingleProduct from "@/hooks/useProductDetails";
 import ProductImage from "./ProductImage";
 import ProductPrice from "./ProductPrice";
-import ProductNotFound from "./ProductNotFound";
 import useProductActions from "@/hooks/useProductActions";
 import { Button } from "@/components/ui/Button";
+import NotFound from "../NotFound/NotFound";
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -21,7 +21,7 @@ const ProductDetails = () => {
     selectSize,
   } = useProductActions();
 
-  if (!product) return <ProductNotFound />;
+  if (!product) return <NotFound />;
 
   return (
     <section className="single-product-container">
