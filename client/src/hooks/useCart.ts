@@ -124,17 +124,13 @@ const useCart = () => {
       const response = await axios.delete(`/api/cart/clear`, {
         data: { userId: user._id },
       });
-
-      if (response.status === 200) {
-        dispatch(setCart([]));
-        showToast("Panier vidé avec succès", ToastType.SUCCESS);
-      } else {
-        throw new Error("Erreur lors de la suppression du panier");
+      if (!response) {
+        console.log("Erreur lors de la suppression du panier");
       }
+      dispatch(setCart([]));
     } catch (err) {
       console.error("Erreur lors de la suppression du panier:", err);
       setError("Erreur lors de la suppression du panier");
-      showToast("Erreur lors de la suppression du panier", ToastType.ERROR);
     }
   };
 
