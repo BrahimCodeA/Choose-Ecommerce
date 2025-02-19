@@ -1,0 +1,57 @@
+.cancel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 1rem;
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+.cancel-title {
+  font-size: 2rem;
+  color: #dc3545;
+  margin-bottom: 1rem;
+}
+
+.cancel-message {
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
+}
+
+.cancel-link {
+  text-decoration: none;
+  background-color: #6c757d;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #444;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .cancel-title {
+    font-size: 2.5rem;
+  }
+
+  .cancel-message {
+    font-size: 1.5rem;
+  }
+
+  .cancel-link {
+    font-size: 1.25rem;
+    padding: 1rem 2rem;
+  }
+}
