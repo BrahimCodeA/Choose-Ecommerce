@@ -8,6 +8,8 @@ import Cart from "@/pages/Cart/Cart";
 import Men from "@/pages/Men/Men";
 import Women from "@/pages/Women/Women";
 import Kid from "@/pages/Kid/Kid";
+import Success from "./pages/Success/Success";
+import Cancel from "./pages/Cancel/Cancel";
 import ScrollUp from "@/components/ScrollUp/ScrollUp";
 
 import { useSelector } from "react-redux";
@@ -42,6 +44,8 @@ function App() {
                   <Route path="/women" element={<Women />} />
                   <Route path="/kid" element={<Kid />} />
                   <Route path="/product/:id" element={<ProductDetails />} />
+                  <Route path="/success" element={<Success />} />
+                  <Route path="/cancel" element={<Cancel />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </div>
