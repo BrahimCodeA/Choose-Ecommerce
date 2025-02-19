@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/Button";
 import "./Cart.scss";
+import { Button } from "@/components/ui/Button";
+import CartNotFound from "./CartNotFound";
 import useCart from "@/hooks/useCart";
 import CartList from "./CartList";
-import CartTotal from "./CartTotal";
-import CartNotFound from "./CartNotFound";
+import usePayment from "@/hooks/usePayment";
 
 const Cart = () => {
   const {
@@ -16,10 +16,9 @@ const Cart = () => {
     updateQuantity,
     totalPrice,
   } = useCart();
+  const { isSubmitting, makePayment } = usePayment();
 
-  if (!user) {
-    return <CartNotFound />;
-  }
+  if (!user) return <CartNotFound />;
 
   return (
     <section className="cart">
@@ -37,10 +36,21 @@ const Cart = () => {
               removeItemFromCart={removeItemFromCart}
             />
           </div>
-          <CartTotal totalPrice={totalPrice} />
+          <div className="cart__total">
+            <p>Total: {totalPrice.toFixed(2)}€</p>
+          </div>
+          <Button
+            className="cart__checkout-button"
+            onClick={makePayment}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Chargement..." : "Passer commande"}
+          </Button>
+
           <Button
             className="cart__clear-button"
             onClick={clearCart}
+            disabled={isSubmitting}
             title="Vider le panier"
           />
         </>
