@@ -10,7 +10,7 @@ const Success = () => {
 
   useEffect(() => {
     clearCart();
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="success-container">
