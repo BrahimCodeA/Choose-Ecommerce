@@ -18,7 +18,7 @@ export const useProductList = () => {
       }
     };
 
-    if (!products || products.length === 0) fetchProducts();
+    if (!products) fetchProducts();
   }, [dispatch, products]);
 
   return products;
