@@ -1,15 +1,21 @@
 import "./Hero.scss";
+import { Model } from "../Model3D/Model";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 
 export default function Hero() {
   return (
-    <div className="hero-content">
-      <div className="hero-title">
-        <h1>CHOOSE</h1>
-        <p>La boutique de vos rêves</p>
-      </div>
-      <div className="hero-description">
-        <p>Choisissez parmi une large sélection de sneakers de qualité.</p>
-      </div>
-    </div>
+    <>
+      <Canvas
+        style={{
+          height: "100vh",
+          width: "100wh",
+        }}
+      >
+        <OrbitControls />
+        <ambientLight intensity={10} />
+        <Model />
+      </Canvas>
+    </>
   );
 }
