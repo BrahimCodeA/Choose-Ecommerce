@@ -1,7 +1,7 @@
 import "./CategoryLinks.scss";
-import men from "@/assets/Home-Men.jpg";
-import women from "@/assets/Home-Women.avif";
-import kid from "@/assets/Home-Kid.jpg";
+import men from "@/assets/Home-Men.webp";
+import women from "@/assets/Home-Women.webp";
+import kid from "@/assets/Home-Kid.webp";
 import Category from "./Category";
 
 export default function CategoryPages() {
