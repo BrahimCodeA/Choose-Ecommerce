@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/Checkbox";
 import { ImageUploader } from "@/components/ui/ImageUploader";
 import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/Button";
-import cloudImage from "@/assets/cloudUpload.png";
+import cloudImage from "@/assets/cloudUpload.webp";
 import { sizesOptions } from "@/constants/sizesOptions";
 
 export default function AddProduct() {

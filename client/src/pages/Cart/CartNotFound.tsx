@@ -1,4 +1,4 @@
-import loginImage from "@/assets/cart_notFound.png";
+import loginImage from "@/assets/cart_notFound.webp";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 
