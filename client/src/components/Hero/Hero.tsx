@@ -1,5 +1,5 @@
 import "./Hero.scss";
-import { Model_One } from "../Model3D/Model_One";
+import { Model } from "../Model3D/Model";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
@@ -10,7 +10,8 @@ export default function Hero() {
       <div className="canvas-container">
         <Canvas camera={{ position: [1, 2, 2] }}>
           <OrbitControls enableZoom={false} enablePan={false} />
-          <Model_One scale={[13, 13, 13]} position={[0, -1, 0]} />
+          <ambientLight intensity={10} />
+          <Model scale={[10, 10, 10]} />
         </Canvas>
       </div>
     </div>
