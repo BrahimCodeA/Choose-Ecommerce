@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 const generateTokens = (userId) => {
   const accessToken = jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: "1d",
+    expiresIn: "30m",
   });
 
   const refreshToken = jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET, {
@@ -39,14 +39,14 @@ const setCookies = (res, accessToken, refreshToken) => {
 };
 
 export const registerUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
   try {
     const userExists = await User.findOne({ email });
 
     if (userExists) {
       return res.status(400).json({ message: "Compte déjà existant" });
     }
-    const user = await User.create({ email, password });
+    const user = await User.create({ name, email, password });
 
     const { accessToken, refreshToken } = generateTokens(user._id);
     await storeRefreshToken(user._id, refreshToken);
@@ -55,6 +55,7 @@ export const registerUser = async (req, res) => {
 
     res.status(201).json({
       _id: user._id,
+      name: user.name,
       email: user.email,
       role: user.role,
     });
@@ -76,6 +77,7 @@ export const loginUser = async (req, res) => {
 
       res.json({
         _id: user._id,
+        name: user.name,
         email: user.email,
         role: user.role,
       });
