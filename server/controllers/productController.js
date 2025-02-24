@@ -61,8 +61,6 @@ const addProduct = async (req, res) => {
       image: imagesUrl,
     };
 
-    console.log(productData);
-
     const product = new productModel(productData);
     await product.save();
 
