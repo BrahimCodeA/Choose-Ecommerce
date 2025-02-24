@@ -19,11 +19,7 @@ export const useSignIn = (
   const onSubmit = async (data: signInFields) => {
     dispatch(signInRequest());
     try {
-      const response = await axios.post("/api/user/login", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post("/api/user/login", data);
       dispatch(signInSuccess(response.data));
       console.log("Connexion réussie", response.data);
       showToast("Connexion réussie !", ToastType.SUCCESS);
