@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/Checkbox";
 import { ImageUploader } from "@/components/ui/ImageUploader";
 import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/Button";
-import cart_notFound from "@/assets/cart_notFound.webp";
+import cloudUpload from "../../../assets/cloudUpload.webp";
 import { sizesOptions } from "@/constants/sizesOptions";
 
 export default function AddProduct() {
@@ -142,12 +142,12 @@ export default function AddProduct() {
           <ImageUploader
             image={image1}
             onImageChange={setImage1}
-            placeholderImg={cart_notFound}
+            placeholderImg={cloudUpload}
           />
           <ImageUploader
             image={image2}
             onImageChange={setImage2}
-            placeholderImg={cart_notFound}
+            placeholderImg={cloudUpload}
           />
         </div>
         <Button
