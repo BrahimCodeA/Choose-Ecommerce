@@ -6,7 +6,7 @@ import {
   singleProduct,
 } from "../controllers/productController.js";
 import upload from "../middlewares/multer.js";
-import { adminRoute, protectRoute } from "../middlewares/adminAuth.js";
+import { adminRoute, protectRoute } from "../middlewares/Auth.js";
 
 const productRouter = express.Router();
 
