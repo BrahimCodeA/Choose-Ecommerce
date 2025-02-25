@@ -7,12 +7,11 @@ import { useSelector, useDispatch } from "react-redux";
 export const useProductList = () => {
   const products = useSelector((state: RootState) => state.product.products);
   const dispatch = useDispatch();
-  const API_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(`${API_URL}/api/product/list`);
+        const res = await axios.get("/api/product/list");
         dispatch(setProducts(res.data.products));
       } catch (error) {
         console.error("Erreur lors de la récupération des produits :", error);
