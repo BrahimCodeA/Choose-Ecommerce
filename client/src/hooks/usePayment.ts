@@ -23,7 +23,7 @@ const usePayment = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/payment/create-payment-intent",
+        `${import.meta.env.VITE_BACKEND_URL}/api/payment/create-payment-intent`,
         body
       );
 
