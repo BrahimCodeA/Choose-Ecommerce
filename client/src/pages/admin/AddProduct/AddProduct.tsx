@@ -4,9 +4,9 @@ import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { TextArea } from "@/components/ui/TextArea";
 import { Checkbox } from "@/components/ui/Checkbox";
+import { ImageUploader } from "@/components/ui/ImageUploader";
 import { Label } from "@/components/ui/Label";
 import { Button } from "@/components/ui/Button";
-import { FiUploadCloud } from "react-icons/fi";
 import { sizesOptions } from "@/constants/sizesOptions";
 
 export default function AddProduct() {
@@ -137,47 +137,18 @@ export default function AddProduct() {
             </ul>
           </div>
         )}
-
         <div className="form-images">
-          {/* Upload de la première image */}
-          <label className="form-image-upload">
-            {image1 ? (
-              <img
-                src={URL.createObjectURL(image1)}
-                alt="Prévisualisation de l'image 1"
-                className="form-image-preview"
-              />
-            ) : (
-              <FiUploadCloud size={50} color="#888" />
-            )}
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => e.target.files && setImage1(e.target.files[0])}
-              hidden
-            />
-          </label>
-
-          {/* Upload de la deuxième image */}
-          <label className="form-image-upload">
-            {image2 ? (
-              <img
-                src={URL.createObjectURL(image2)}
-                alt="Prévisualisation de l'image 2"
-                className="form-image-preview"
-              />
-            ) : (
-              <FiUploadCloud size={50} color="#888" />
-            )}
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => e.target.files && setImage2(e.target.files[0])}
-              hidden
-            />
-          </label>
+          <ImageUploader
+            image={image1}
+            onImageChange={setImage1}
+            placeholderImg={"/assets/cloudUpload.webp"}
+          />
+          <ImageUploader
+            image={image2}
+            onImageChange={setImage2}
+            placeholderImg={"/assets/cloudUpload.webp"}
+          />
         </div>
-
         <Button
           type="submit"
           disabled={isSubmitting}
