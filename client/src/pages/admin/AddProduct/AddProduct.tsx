@@ -139,16 +139,37 @@ export default function AddProduct() {
           </div>
         )}
         <div className="form-images">
-          <ImageUploader
-            image={image1}
-            onImageChange={setImage1}
-            placeholderImg={cloudUpload}
-          />
-          <ImageUploader
-            image={image2}
-            onImageChange={setImage2}
-            placeholderImg={cloudUpload}
-          />
+          <div className="form-images">
+            {/* Upload de la première image */}
+            <label className="form-image-upload">
+              <img
+                src={image1 ? URL.createObjectURL(image1) : cloudUpload}
+                alt="Prévisualisation de l'image 1"
+                className="form-image-preview"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => e.target.files && setImage1(e.target.files[0])}
+                hidden
+              />
+            </label>
+
+            {/* Upload de la deuxième image */}
+            <label className="form-image-upload">
+              <img
+                src={image2 ? URL.createObjectURL(image2) : cloudUpload}
+                alt="Prévisualisation de l'image 2"
+                className="form-image-preview"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => e.target.files && setImage2(e.target.files[0])}
+                hidden
+              />
+            </label>
+          </div>
         </div>
         <Button
           type="submit"
