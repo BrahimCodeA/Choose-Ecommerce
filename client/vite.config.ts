@@ -19,7 +19,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "dist", // ✅ Ajout de cette ligne
+    outDir: "dist",
     chunkSizeWarningLimit: 1500,
     rollupOptions: {
       output: {
