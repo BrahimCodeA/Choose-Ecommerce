@@ -9,7 +9,12 @@ export default function Home() {
     <>
       <Hero />
       <BestSellerSlider />
-      <div className="bestseller-discount-separator">
+      <div
+        className="bestseller-discount-separator"
+        style={{
+          backgroundImage: "url('/assets/sneakers-cave.webp')",
+        }}
+      >
         <div className="text">Une collection unique</div>
       </div>
       <DiscountedProducts />
