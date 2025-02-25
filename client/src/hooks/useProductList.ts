@@ -11,7 +11,9 @@ export const useProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("/api/product/list");
+        const res = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/product/list`
+        );
         dispatch(setProducts(res.data.products));
       } catch (error) {
         console.error("Erreur lors de la récupération des produits :", error);
