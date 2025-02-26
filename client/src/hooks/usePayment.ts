@@ -22,10 +22,7 @@ const usePayment = () => {
     };
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/payment/create-payment-intent`,
-        body
-      );
+      const response = await axios.post(`/payment/create-payment-intent`, body);
 
       const session = response.data;
       const result = await stripe.redirectToCheckout({ sessionId: session.id });
