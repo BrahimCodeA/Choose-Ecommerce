@@ -5,6 +5,10 @@ import useCart from "./useCart";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
+if (!stripePromise) {
+  console.error("⚠️ ERREUR: La clé Stripe n'est pas définie !", stripePromise);
+}
+
 const usePayment = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { cart } = useCart();
@@ -21,7 +25,10 @@ const usePayment = () => {
     const body = { products: cart };
 
     try {
-      const response = await axios.post(`/payment/create-payment-intent`, body);
+      const response = await axios.post(
+        `/api/payment/create-payment-intent`,
+        body
+      );
 
       if (!response.data || !response.data.id) {
         throw new Error("Réponse de session Stripe invalide.");
@@ -32,7 +39,6 @@ const usePayment = () => {
 
       if (result.error) {
         console.error("Erreur lors du paiement:", result.error.message);
-        alert("Une erreur est survenue lors du paiement.");
       }
     } catch (error) {
       console.error("Erreur lors de la redirection vers le checkout:", error);
