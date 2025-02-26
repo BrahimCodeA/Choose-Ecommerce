@@ -15,20 +15,9 @@ const port = process.env.PORT || 4000;
 connectDB();
 connectCloudinary();
 
-var allowlist = [process.env.FRONT_APP_URL];
-var corsOptionsDelegate = function (req, callback) {
-  var corsOptions;
-  if (allowlist.indexOf(req.header("Origin")) !== -1) {
-    corsOptions = { origin: true };
-  } else {
-    corsOptions = { origin: false };
-  }
-  callback(null, corsOptions);
-};
-
 // Middlewares
 app.use(express.json());
-app.use(cors(corsOptionsDelegate));
+app.use(cors());
 app.use(cookieParser());
 
 // API Endpoints
