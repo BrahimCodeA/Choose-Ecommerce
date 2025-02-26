@@ -30,10 +30,6 @@ app.use("/api/product", productRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/payment", paymentRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/dist")));
 
