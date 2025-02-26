@@ -1,21 +1,32 @@
-# Node.js
-node_modules/
-.env
-assets/
-
-# VS Code
-.vscode/
-
 # Logs
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node.js
+node_modules
+.env
+
+# Build
+dist
+dist-ssr
+build
+assets
+
+# Éditeurs
+.vscode/
+!.vscode/extensions.json
+.idea
 
 # Système
 .DS_Store
 Thumbs.db
 
-# Build
-dist/
-build/
+# Autres
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
