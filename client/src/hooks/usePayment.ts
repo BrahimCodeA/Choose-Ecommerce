@@ -3,42 +3,45 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 import useCart from "./useCart";
 
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+
 const usePayment = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const { cart } = useCart();
-  const STRIPE_PUBLIC_KEY = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 
   const makePayment = async () => {
-    const stripe = await loadStripe(STRIPE_PUBLIC_KEY);
+    const stripe = await stripePromise;
 
     if (!stripe) {
       console.error("Stripe n'a pas pu être chargé correctement.");
       return;
     }
+
     setIsSubmitting(true);
-    const body = {
-      products: cart,
-    };
+    const body = { products: cart };
 
     try {
       const response = await axios.post(`/payment/create-payment-intent`, body);
+
+      if (!response.data || !response.data.id) {
+        throw new Error("Réponse de session Stripe invalide.");
+      }
 
       const session = response.data;
       const result = await stripe.redirectToCheckout({ sessionId: session.id });
 
       if (result.error) {
-        console.error(
-          "Erreur lors de la redirection vers le checkout:",
-          result.error
-        );
+        console.error("Erreur lors du paiement:", result.error.message);
+        alert("Une erreur est survenue lors du paiement.");
       }
     } catch (error) {
-      console.log("Erreur lors de la redirection vers le checkout:", error);
+      console.error("Erreur lors de la redirection vers le checkout:", error);
+      alert("Erreur lors du paiement. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
   };
+
   return { isSubmitting, makePayment };
 };
 
