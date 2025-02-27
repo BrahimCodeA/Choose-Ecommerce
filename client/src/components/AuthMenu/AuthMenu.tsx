@@ -19,7 +19,7 @@ export default function AuthMenu() {
   const [isHovered, setIsHovered] = useState(false);
   const [activeModal, setActiveModal] = useState<ModalType>(null);
 
-  const user = useSelector((state: RootState) => state.user.user);
+  const user = useSelector((state: RootState) => state.users.user);
   const navigate = useNavigate();
   const { handleLogout } = useHandleLogout();
 

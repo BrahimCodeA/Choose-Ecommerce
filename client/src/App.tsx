@@ -23,7 +23,7 @@ import Cookie from "./components/Cookie/Cookie";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 
 function App() {
-  const user = useSelector((state: RootState) => state.user.user);
+  const user = useSelector((state: RootState) => state.users.user);
 
   return (
     <div className="app-container">
