@@ -1,5 +1,7 @@
-import * as THREE from "three";
+import { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
@@ -16,8 +18,17 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF(
     "/air_jordan_1_og_high_dior/scene.gltf"
   ) as GLTFResult;
+
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame(() => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += 0.007;
+    }
+  });
+
   return (
-    <group {...props} dispose={null}>
+    <group {...props} ref={groupRef} dispose={null} position={[0, -0.5, 0]}>
       <group scale={0.01}>
         <group scale={100}>
           <group scale={0.01}>
