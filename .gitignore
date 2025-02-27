@@ -13,7 +13,7 @@ node_modules
 dist
 dist-ssr
 build
-assets
+public/
 
 # Éditeurs
 .vscode/
