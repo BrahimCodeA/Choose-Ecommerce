@@ -5,7 +5,7 @@ import { RootState } from "@/redux/store";
 
 export const usePagination = <T>(items: T[], pageSize: number) => {
   const dispatch = useDispatch();
-  const { page } = useSelector((state: RootState) => state.product);
+  const { page } = useSelector((state: RootState) => state.products);
 
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;

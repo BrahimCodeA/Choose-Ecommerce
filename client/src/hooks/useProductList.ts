@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 export const useProductList = () => {
-  const products = useSelector((state: RootState) => state.product.products);
+  const products = useSelector((state: RootState) => state.products.products);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -11,9 +11,9 @@ const useProductActions = () => {
   const { addToCart } = useCart();
 
   const product = useSelector(
-    (state: RootState) => state.product.selectedProduct
+    (state: RootState) => state.products.selectedProduct
   );
-  const user = useSelector((state: RootState) => state.user.user);
+  const user = useSelector((state: RootState) => state.users.user);
 
   const toggleDescription = () => setIsOpen((prev) => !prev);
   const selectSize = (size: string) => setSelectedSize(size);

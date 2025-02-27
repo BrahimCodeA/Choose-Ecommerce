@@ -11,8 +11,8 @@ import {
 
 const useCart = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user.user);
-  const cart = useSelector((state: RootState) => state.cart.cart);
+  const user = useSelector((state: RootState) => state.users.user);
+  const cart = useSelector((state: RootState) => state.carts.cart);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

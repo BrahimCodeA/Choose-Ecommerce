@@ -12,7 +12,7 @@ export const ProductSearch = ({
   searchQuery,
   onCloseSearch,
 }: ProductSearchProps) => {
-  const products = useSelector((state: RootState) => state.product.products);
+  const products = useSelector((state: RootState) => state.products.products);
 
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase())
