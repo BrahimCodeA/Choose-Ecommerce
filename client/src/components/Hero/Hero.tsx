@@ -8,10 +8,10 @@ export default function Hero() {
     <div className="hero-container">
       <h1 className="hero-title">Elevate Your Look</h1>
       <div className="canvas-container">
-        <Canvas camera={{ position: [1, 2, 2] }}>
+        <Canvas camera={{ position: [-1, 1.5, 2] }}>
           <OrbitControls enableZoom={false} enablePan={false} />
           <ambientLight intensity={10} />
-          <Model scale={[10, 10, 10]} />
+          <Model scale={[11, 11, 11]} />
         </Canvas>
       </div>
     </div>
