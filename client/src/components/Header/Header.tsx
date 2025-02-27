@@ -32,9 +32,9 @@ export default function Header() {
   return (
     <header className="wrapper">
       <nav className="navbar-1">
-        <Link to="/" className="logo">
+        <a href="/" className="logo">
           CHOOSE
-        </Link>
+        </a>
         {isDesktop && <Navbar onCloseMenu={toggleMenu} />}
 
         <div className="icons">
