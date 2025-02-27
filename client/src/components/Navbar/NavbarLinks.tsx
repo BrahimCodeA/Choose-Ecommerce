@@ -1,6 +1,6 @@
 import { links, brands } from "@/constants/navbarData";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom"; // Importer NavLink
 
 export default function NavbarLinks({
   onCloseMenu,
@@ -12,9 +12,13 @@ export default function NavbarLinks({
       <ul className="links-pages">
         {links.map((link, index) => (
           <li key={index} className="link">
-            <Link to={link.link} onClick={onCloseMenu}>
-              {link.title} {<IoIosArrowForward className="arrow-link" />}
-            </Link>
+            <NavLink
+              to={link.link}
+              onClick={onCloseMenu}
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              {link.title} <IoIosArrowForward className="arrow-link" />
+            </NavLink>
           </li>
         ))}
       </ul>
