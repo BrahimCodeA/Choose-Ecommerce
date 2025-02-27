@@ -12,7 +12,7 @@ import { useIsDesktop } from "@/hooks/useIsDesktop";
 import useCart from "@/hooks/useCart";
 
 export default function Header() {
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [openSearch, setOpenSearch] = useState(false);
   const isDesktop = useIsDesktop();
 
