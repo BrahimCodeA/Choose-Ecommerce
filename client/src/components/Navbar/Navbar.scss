@@ -32,18 +32,24 @@
       align-items: center;
       color: black;
       font-weight: bold;
+      transition: color 0.3s ease, transform 0.3s ease;
     }
 
-    a:hover {
+    a:hover,
+    a.active {
       color: #777;
+      font-weight: bold;
+      text-decoration: underline;
     }
 
     .arrow-link {
       transition: transform 0.3s ease;
     }
-  }
-  a:hover .arrow-link {
-    transform: rotate(90deg);
+
+    a:hover .arrow-link,
+    a.active .arrow-link {
+      transform: rotate(90deg);
+    }
   }
 }
 
@@ -58,10 +64,21 @@
     align-items: center;
     font-size: 1.5rem;
     color: black;
+    transition: color 0.3s ease;
+  }
 
-    svg {
-      margin-right: 0.5rem;
-    }
+  .brand:hover {
+    color: #777;
+  }
+
+  svg {
+    margin-right: 0.5rem;
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .brand:hover svg {
+    transform: scale(1.1);
   }
 }
 
