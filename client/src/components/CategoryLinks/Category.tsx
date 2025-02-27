@@ -6,6 +6,7 @@ type CategoryProps = {
   title: string;
   description: string;
   link: string;
+  overlay?: string;
 };
 
 const Category = ({
@@ -14,17 +15,18 @@ const Category = ({
   title,
   description,
   link,
+  overlay,
 }: CategoryProps) => {
   return (
     <div className="category">
-      <img src={imageSrc} alt={altText} />
-      <div className="overlay">
-        <h2>{title}</h2>
-        <p>{description}</p>
-        <Link to={link} className="btn-link">
-          Shop
-        </Link>
-      </div>
+      <Link to={link} className="btn-link">
+        <img src={imageSrc} alt={altText} />
+        <div className="info">
+          <h2>{title}</h2>
+          <p>{description}</p>
+        </div>
+        {overlay && <div className="overlay">{overlay}</div>}
+      </Link>
     </div>
   );
 };
