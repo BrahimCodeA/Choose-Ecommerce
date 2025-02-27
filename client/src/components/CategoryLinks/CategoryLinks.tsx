@@ -10,6 +10,7 @@ export default function CategoryPages() {
         title="Homme"
         description="Jordan, Nike, et plus."
         link="/men"
+        overlay="Découvrir la collection"
       />
       <Category
         imageSrc="/assets/Home-Women.webp"
@@ -17,6 +18,7 @@ export default function CategoryPages() {
         title="Femme"
         description="Styles tendance."
         link="/women"
+        overlay="Visite notre boutique"
       />
       <Category
         imageSrc="/assets/Home-Kid.webp"
@@ -24,6 +26,7 @@ export default function CategoryPages() {
         title="Enfant"
         description="Pour les petits fans."
         link="/kid"
+        overlay="Jeunesse en vogue"
       />
     </section>
   );
