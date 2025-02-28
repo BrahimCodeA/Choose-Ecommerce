@@ -1,3 +1,7 @@
+## Lien de l'application en ligne:
+
+https://choose-ecommerce.onrender.com/
+
 ## Prérequis
 
 Assurez-vous d'avoir installé les éléments suivants sur votre machine :
